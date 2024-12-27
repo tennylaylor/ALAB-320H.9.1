@@ -1,21 +1,16 @@
-function handleSubmit(e) {
+import React, { useState } from "react";
+
+function TodoForm({ onAddTodo }) {
+  const [input, setInput] = useState("");
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!input.trim()) return;
 
-    if (!formData.title.trim()) {
-      return;
-    }
-    const newToDo = { ...formData, id: Date.now() };
-    dispatch({ type: ACTIONS.ADD_TODO, payload: newToDo });
-
-    setFormData({ title: "", completed: false });
-  }
-
-  function handleChange(e) {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  }
+    onAddTodo(input);
+    setInput("");
+    console.log("New todo added:", input);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
