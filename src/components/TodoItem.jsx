@@ -7,7 +7,6 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
   const handleSave = () => {
     onEdit(todo.id, editText);
     setIsEditing(false);
-    console.log("Todo edited:", editText);
   };
 
   if (isEditing) {
@@ -26,22 +25,13 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
   return (
     <li>
       <input
-        type="radio"
+        type="checkbox"
         checked={todo.completed}
-        onChange={() => {
-          onToggle(todo.id);
-          console.log("Todo toggled:", todo.title);
-        }}
+        onChange={() => onToggle(todo.id)}
       />
       <span className={todo.completed ? "completed" : ""}>{todo.title}</span>
       <button onClick={() => setIsEditing(true)}>Edit</button>
-      <button
-        onClick={() => {
-          onDelete(todo.id);
-          console.log("Todo deleted:", todo.title);
-        }}
-        disabled={!todo.completed}
-      >
+      <button onClick={() => onDelete(todo.id)} disabled={!todo.completed}>
         Delete
       </button>
     </li>
